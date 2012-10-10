@@ -12,4 +12,13 @@ Próbna implementacja pomysłu na Warsztat game z użyciem następujących techn
 
 Celem jest zaprezentowanie możliwości technicznych rozwiązania, które polega na tym, że jeden z graczy będzie pełnił funkcję autorytatywnego serwera dla pozostałych graczy.
 
-Gra to najprostszy pong.
+= Gameplay:
+
+Gra to najprostszy pong dla wielu graczy. Gra toczy się wewnątrz wielokąta:
+- prostokąt dla dwóch graczy
+- trójkąt dla trzech
+- prostokąt dla czterech
+- pięciokąt dla pięciu
+- sześciokąt dla sześci itd.
+
+Celem gracza jest nieprzepuszczanie piłki przez swój bok.
