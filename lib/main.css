@@ -2,3 +2,16 @@ body {
 	background: black;
 	color: white;
 }
+
+.plane {
+  width: 800px;
+  margin: 400px auto;
+}
+
+.plane .edge {
+  background: white;
+  height: 3px;
+  position: absolute;
+  -webkit-transition: width 1s linear, -webkit-transform 1s linear;
+  -moz-transition: width 1s linear, -webkit-transform 1s linear;
+}

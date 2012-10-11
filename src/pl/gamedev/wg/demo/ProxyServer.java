@@ -11,11 +11,10 @@ import org.java_websocket.server.WebSocketServer;
 public class ProxyServer {
 
 	public static void main(String[] args) throws Exception {
-		String serverHost = args != null && args[0] != null ? args[0] : "localhost";  
-		int serverSocketPort = args[1] != null ? Integer.parseInt(args[1]) : 10123;
-		int serverHttpPort = args[2] != null ? Integer.parseInt(args[2]) : 1750;
-		
-		
+		String serverHost = args != null && args.length > 0 && args[0] != null ? args[0] : "localhost";
+		int serverSocketPort = args != null && args.length > 1 && args[1] != null ? Integer.parseInt(args[1]) : 10123;
+		int serverHttpPort = args != null && args.length > 2 && args[2] != null ? Integer.parseInt(args[2]) : 1750;
+
 		WebSocketServer socketServer = new WebSocketServer(new InetSocketAddress(serverHost, serverSocketPort)) {
 
 			@Override
@@ -46,7 +45,7 @@ public class ProxyServer {
 		Server httpServer = new Server(new InetSocketAddress(serverHost, serverHttpPort));
 		ResourceHandler resources = new ResourceHandler();
 		resources.setDirectoriesListed(false);
-        resources.setWelcomeFiles(new String[]{ "index.html" });
+		resources.setWelcomeFiles(new String[] { "index.html" });
 		resources.setResourceBase("./lib");
 		httpServer.setHandler(resources);
 		httpServer.start();
