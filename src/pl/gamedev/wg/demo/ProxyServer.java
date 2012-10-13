@@ -34,6 +34,7 @@ public class ProxyServer {
 
 			@Override
 			public void onOpen(WebSocket conn, ClientHandshake handshake) {
+				System.out.println(conn.getRemoteSocketAddress() + " connected");
 				clients.add(conn);
 				clientID.put(conn, System.currentTimeMillis());
 				if (hostID.get() == 0) {
@@ -45,7 +46,7 @@ public class ProxyServer {
 
 			@Override
 			public void onMessage(WebSocket conn, String message) {
-				java.lang.System.out.println(message);
+				// java.lang.System.out.println(message);
 				long id = clientID.get(conn);
 				boolean isHost = hostID.get() == id;
 				String header = message.substring(0, message.indexOf(':'));
@@ -64,6 +65,7 @@ public class ProxyServer {
 
 			@Override
 			public void onError(WebSocket conn, Exception ex) {
+				System.out.println(conn.getRemoteSocketAddress() + " error:");
 				if (conn != null && clientID.containsKey(conn)) {
 					long id = clientID.get(conn);
 					if (hostID.get() == id)
@@ -74,6 +76,7 @@ public class ProxyServer {
 
 			@Override
 			public void onClose(WebSocket conn, int code, String reason, boolean remote) {
+				System.out.println(conn.getRemoteSocketAddress() + " disconnected");
 				long id = clientID.get(conn);
 				clients.remove(conn);
 				if (hostID.get() == id) {
