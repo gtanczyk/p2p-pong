@@ -29,9 +29,13 @@ body {
 	background: white;
 	height: 3px;
 	position: absolute;
-	-webkit-transition: width 1s linear, -webkit-transform 1s linear;
-	-moz-transition: width 1s linear, -webkit-transform 1s linear;
+	-webkit-transition: width 1s linear, -webkit-transform 1s linear, background 0.5s linear;;
+	-moz-transition: width 1s linear, -webkit-transform 1s linear, background 0.5s linear;;
 	cursor: pointer;
+}
+
+.plane .edge.hit {
+	background: red;
 }
 
 .edge .box {
