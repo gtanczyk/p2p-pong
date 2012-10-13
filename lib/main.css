@@ -6,9 +6,10 @@ body {
 
 .plane {
 	width: 800px;
+	top: 0px;
+	left: 50%;
+	margin-left: -400px;
 	position: absolute;
-	top: 400px;
-	left: 400px;
 }
 
 .plane .ball {
@@ -30,9 +31,12 @@ body {
 	height: 3px;
 	position: absolute;
 	transition: width 1s linear, background 0.5s linear, transform 1s linear;
-	-o-transition: width 1s linear, background 0.5s linear, -o-transform 1s linear;	
-	-webkit-transition: width 1s linear, background 0.5s linear, -webkit-transform 1s linear;
-	-moz-transition: width 1s linear, background 0.5s linear, -moz-transform 1s linear;
+	-o-transition: width 1s linear, background 0.5s linear, -o-transform 1s
+		linear;
+	-webkit-transition: width 1s linear, background 0.5s linear,
+		-webkit-transform 1s linear;
+	-moz-transition: width 1s linear, background 0.5s linear, -moz-transform
+		1s linear;
 	cursor: pointer;
 }
 
@@ -40,18 +44,99 @@ body {
 	background: red;
 }
 
+.plane .edge .status {
+	position: absolute;
+	top: 30px;
+	text-align: center;
+	font-weight: bold;
+	font-size: large;
+	font-family: Tahoma;
+	pointer-events: none;
+	display: none;
+	visibility: hidden;
+}
+
+.plane .edge .status>b {
+	display: block;
+	transition: color 0.5s linear;
+	-o-transition: color 0.5s linear;
+	-webkit-transition: color 0.5s linear;
+	-moz-transition: color 0.5s linear;
+}
+
+.plane .edge .status>input {
+	color: white;
+	background: none;
+	border: none;
+	pointer-events: none;
+	text-align: center;
+}
+
+.plane .edge .box+.status {
+	display: block;
+	visibility: visible;
+}
+
+.plane .edge.hit>.status>b {
+	color: gold;
+}
+
 .edge .box {
 	background: red;
 	width: 25px;
 	height: 10px;
 	position: absolute;
-	margin-top: -10px;
+	margin-top: -5px;
 	transition: margin-left 0.1s linear, background 0.5s linear;;
-	-o-transition: margin-left 0.1s linear, background 0.5s linear;;	
+	-o-transition: margin-left 0.1s linear, background 0.5s linear;;
 	-webkit-transition: margin-left 0.1s linear, background 0.5s linear;;
-	-moz-transition: margin-left 0.1s linear, background 0.5s linear;;
+	-moz-transition: margin-left 0.1s linear, background 0.5s linear;
+	border-radius: 10px;
 }
 
 .plane .box.hit {
 	background: white;
+}
+
+/* controls */
+
+.controls {
+	position: absolute;
+	width: 400px;
+	left: 100%;
+	margin-left: -200px;
+}
+
+.controls.ingame {
+	left: 0!important;
+	top: 0!important;
+	margin: 0!important;
+	pointer-events: none;
+}
+
+.controls button,.controls input {
+	font-size: large;
+	color: white;
+	font-weight: bold;
+	font-family: Tahoma;
+	background: none;
+	border: none;
+	padding: 5px 10px;
+}
+
+.controls input {
+	border: 1px solid white;
+}
+
+.controls input[disabled] {
+	border: none;
+	pointer-events: none;
+}
+
+.controls button {
+	cursor: pointer;
+}
+
+.controls button:hover {
+	text-decoration: underline;
 }
