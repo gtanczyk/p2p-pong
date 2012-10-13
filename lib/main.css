@@ -1,17 +1,28 @@
 body {
 	background: black;
 	color: white;
+	overflow: hidden;
 }
 
 .plane {
-  width: 800px;
-  margin: 400px auto;
+width: 800px;
+position: absolute;
+top: 400px;
+left: 400px;
 }
 
 .plane .edge {
-  background: white;
-  height: 3px;
-  position: absolute;
-  -webkit-transition: width 1s linear, -webkit-transform 1s linear;
-  -moz-transition: width 1s linear, -webkit-transform 1s linear;
+	background: white;
+	height: 3px;
+	position: absolute;
+	-webkit-transition: width 1s linear, -webkit-transform 1s linear;
+	-moz-transition: width 1s linear, -webkit-transform 1s linear;
+	cursor: pointer;
+}
+
+.edge .box {
+	background: red;
+	width: 25px;
+	height: 10px;
+	position: absolute;
 }
