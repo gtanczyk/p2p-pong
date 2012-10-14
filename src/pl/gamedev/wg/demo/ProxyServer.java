@@ -91,7 +91,6 @@ public class ProxyServer {
 					clientIDRev.get(hostID.get()).send(id + ":leave");
 			}
 		};
-
 		socketServer.start();
 
 		Server httpServer = new Server(new InetSocketAddress(serverHost, serverHttpPort));
