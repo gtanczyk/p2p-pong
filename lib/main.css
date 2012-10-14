@@ -99,19 +99,11 @@ body {
 }
 
 /* controls */
-
 .controls {
 	position: absolute;
 	width: 400px;
 	left: 100%;
 	margin-left: -200px;
-}
-
-.controls.ingame {
-	left: 0!important;
-	top: 0!important;
-	margin: 0!important;
-	pointer-events: none;
 }
 
 .controls button,.controls input {
@@ -139,4 +131,31 @@ body {
 
 .controls button:hover {
 	text-decoration: underline;
+}
+
+/* controls slider */
+.controls .slider {
+	width: 100%;
+	height: 1px;
+	margin-left: -64px;
+}
+
+.controls .slider>div {
+	width: 100%;
+	background: rgba(100, 100, 100, 0.5);
+	height: 64px;
+	position: absolute;
+	pointer-events: none;
+	padding-right: 64px;
+	border-radius: 4px;
+}
+
+.controls .slider>span {
+	display: block;
+	width: 64px;
+	background: red;
+	border-radius: 4px;
+	height: 64px;
+	position: absolute;
+	cursor: pointer;
 }

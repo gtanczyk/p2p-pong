@@ -35,13 +35,14 @@ public class ProxyServer {
 			@Override
 			public void onOpen(WebSocket conn, ClientHandshake handshake) {
 				System.out.println(conn.getRemoteSocketAddress() + " connected");
+				long id = System.currentTimeMillis();
 				clients.add(conn);
-				clientID.put(conn, System.currentTimeMillis());
+				clientID.put(conn, id);
 				if (hostID.get() == 0) {
 					hostID.set(clientID.get(conn));
 					conn.send("host:");
-				} else
-					conn.send("client:");
+				}
+				conn.send("client:" + id);
 			}
 
 			@Override
@@ -88,7 +89,7 @@ public class ProxyServer {
 					}
 				}
 				if (clientIDRev.get(hostID.get()) != null)
-					clientIDRev.get(hostID.get()).send(id + ":leave");
+					clientIDRev.get(hostID.get()).send(id + ":leave:");
 			}
 		};
 		socketServer.start();

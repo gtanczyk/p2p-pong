@@ -17,7 +17,7 @@ public abstract class WebSocket {
 
 	public static int RCVBUF = 16384;
 
-	public static/*final*/boolean DEBUG = false; // must be final in the future in order to take advantage of VM optimization
+	public static final boolean DEBUG = false; // must be final in the future in order to take advantage of VM optimization
 
 	public static final int READY_STATE_CONNECTING = 0;
 	public static final int READY_STATE_OPEN = 1;
