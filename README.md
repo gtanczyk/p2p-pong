@@ -2,13 +2,13 @@ warsztat-game-demo
 ==================
 
 Próbna implementacja pomysłu na Warsztat game z użyciem następujących technologii:
-- Vanilla JS
+- JavaScript
 - Websockets
 - CSS3
 - Java
 * Java-WebSocket: https://github.com/TooTallNate/Java-WebSocket
 * Jetty 7.6.7: http://download.eclipse.org/jetty/
-- Gimp 2.0
+- Dojo Toolkit 1.7
 
 Celem jest zaprezentowanie możliwości technicznych rozwiązania, które polega na tym, że jeden z graczy będzie pełnił funkcję autorytatywnego serwera dla pozostałych graczy.
 
