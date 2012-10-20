@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Warsztat-game-demo by gamedevpl</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Warsztat-game-demo</h1>
+        <p></p>
+
+        <p class="view"><a href="https://github.com/gamedevpl/warsztat-game-demo">View the Project on GitHub <small>gamedevpl/warsztat-game-demo</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/gamedevpl/warsztat-game-demo/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/gamedevpl/warsztat-game-demo/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/gamedevpl/warsztat-game-demo">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>warsztat-game-demo</h1>
+
+<p>Próbna implementacja pomysłu na Warsztat game z użyciem następujących technologii:</p>
+
+<ul>
+<li>JavaScript</li>
+<li>Websockets</li>
+<li>CSS3</li>
+<li>Java</li>
+<li>Java-WebSocket: <a href="https://github.com/TooTallNate/Java-WebSocket">https://github.com/TooTallNate/Java-WebSocket</a>
+</li>
+<li>Jetty 7.6.7: <a href="http://download.eclipse.org/jetty/">http://download.eclipse.org/jetty/</a>
+</li>
+<li>Dojo Toolkit 1.7</li>
+</ul><p>Celem jest zaprezentowanie możliwości technicznych rozwiązania, które polega na tym, że jeden z graczy będzie pełnił funkcję autorytatywnego serwera dla pozostałych graczy.</p>
+
+<p>= Architektura =</p>
+
+<p>Prosty programik napisany w Javie serwuje pliki statyczne, a także wymienia informacje pomiędzy klientami.</p>
+
+<p>Serwer socketów nadaje klientom identyfikatory, a także decyduje o tym, który z klientów jest hostem gry.</p>
+
+<p>Host gry wysyła do klientów snapshot stanu gry, w którym znajdują się informacje o graczach, informacje o obiektach, planszy, punktacja i log z przebiegu rozgrywki.</p>
+
+<p>Klient na bazie ostatniego snapshotu prowadzi włąsną symulację gry, ale po otrzymaniu nowego snapshota w pełni dostosowuje stan gry po stronie klienta do tego po stronie serwera.</p>
+
+<p>Pomysły:</p>
+
+<ul>
+<li>sumy kontrolne snapshotów</li>
+<li>synchronizacja czasu pomiędzy klientami</li>
+</ul><p>= Gameplay =</p>
+
+<p>Gra to najprostszy pong dla wielu graczy. Gra toczy się wewnątrz wielokąta:</p>
+
+<ul>
+<li>prostokąt dla dwóch graczy</li>
+<li>trójkąt dla trzech</li>
+<li>prostokąt dla czterech</li>
+<li>pięciokąt dla pięciu</li>
+<li>sześciokąt dla sześci itd.</li>
+</ul><p>Celem gracza jest nieprzepuszczanie piłki przez swój bok.</p>
+
+<p>= Jak uruchomić w Eclipse =
+1. Pobierz źródła
+2. Dodaj do User Libraries Jetty 7.6.7
+3. Dodaj bibliotekę Jetty do build path
+4. Uruchom klasę ProxyServer
+5. W przeglądarce otwórz adres: http://localhost:1750</p>
+
+<p>Opcjonalne parametry ProxyServer to:
+[hostname] [socketport] [httpport]</p>
+
+<p>Domyślne wartości: localhost 10123 1750</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/gamedevpl">gamedevpl</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
