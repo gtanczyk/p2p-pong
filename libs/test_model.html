@@ -15,19 +15,28 @@
 </head>
 <body>
     <script>
-        var system = new model.System();
+       var system = new model.System(/* {bounds: [-50, -50, 50, 50]} */);
 
-        var ball = new model.Ball(system, {
-            P : [ 16, 16 ],
-            V : [ 10, 100 ],
-            R : 10
-        });
-
-        var ball2 = new model.Ball(system, {
-            P : [ 40, 30 ],
-            V : [ 100, 120 ],
-            R : 5
-        });
+        var balls = [];
+        for(var i = 0; i < 1; i++)
+            balls.push(new model.Ball(system, {
+        		P : [ - 30 +10 * i, -30+i*10 ],
+            	V : [ (Math.random() - Math.random())*35, (Math.random() - Math.random()) *80],
+            	R : 15
+        	}))
+        	
+        	
+        balls.push(new model.Ball(system, {
+        		P : [30, -30 ],
+            	V : [ (Math.random() - Math.random())*500, (Math.random() - Math.random()) *500],
+            	R : 10
+        	}))
+        	
+        balls.push(new model.Ball(system, {
+        		P : [-30, -30 ],
+            	V : [ (Math.random() - Math.random())*800, (Math.random() - Math.random()) *800],
+            	R : 5
+        	}))
 
         new model.Edge(system, {
             A : [ -50, -50 ],
@@ -45,73 +54,73 @@
             A : [ -50, 50 ],
             B : [ -50, -50 ]
         });
+        
+        new model.Edge(system, {
+            A : [ 0, 50 ],
+            B : [ 50, 0 ]
+        });
 
-        dojo.create('div', {
+        var canvas = dojo.create('canvas', {
+        	width: 100,
+        	height: 100,
             style : {
                 position : 'absolute',
                 left : '250px',
                 top : '150px',
                 width : '100px',
-                height : '100px',
-                border : '1px solid white'
+                height : '100px'
             }
-        }, dojo.body(), 'last')
+        }, dojo.body(), 'last');
+        
+        var context = canvas.getContext('2d');
+        context.strokeStyle   = '#ffffff';
+        
+        system.edges.every(function(edge) {
+            context.beginPath();            
+            context.moveTo(50+edge.A[0], 50-edge.A[1]);
+            context.lineTo(50+edge.B[0], 50-edge.B[1]);
+            context.stroke();
+            context.closePath();
+        	return true;
+        })               
 
-        var step = 120;
-
-        var iter = 0;
-
-        while ((step -= system.doStep(step)) > 0)
-            if (iter++ > 1000)
-                break;
-
-        var res = 6000;
-        for ( var i = 0; i < res; i++) {
-            var position = ball.getPosition(i / 100);
-            var node = dojo.create('div', {
-                style : {
-                    position : 'absolute',
-                    left : 200 + position[0] - 10 + 100 + 'px',
-                    top : 100 - position[1] - 10 + 100 + 'px',
-                    width : '20px',
-                    height : '20px',
-                    borderRadius : '15px',
-                    opacity : 0.5 + i / res,
-                    background : 'rgb(' + Math.floor(250 - i / res * 250) + ', ' + Math.floor(i / res * 250) + ', 0)'
-                }
-            });
-
-            setTimeout(function(node) {
-                dojo.place(node, dojo.body(), 'last');
-                setTimeout(function() {
-                    if (node.parentNode)
-                        node.parentNode.removeChild(node);
-                }, 20);
-            }.bind(this, node), 10 * i);
-
-            var position = ball2.getPosition(i / 100);
-            var node = dojo.create('div', {
-                style : {
-                    position : 'absolute',
-                    left : 200 + position[0] - 5 + 100 + 'px',
-                    top : 100 - position[1] - 5 + 100 + 'px',
-                    width : '10px',
-                    height : '10px',
-                    borderRadius : '5px',
-                    opacity : 0.5 + i / res,
-                    background : 'rgb(0, ' + Math.floor(250 - i / res * 250) + ', ' + Math.floor(i / res * 250) + ')'
-                }
-            });
-
-            setTimeout(function(node) {
-                dojo.place(node, dojo.body(), 'last');
-                setTimeout(function() {
-                    if (node.parentNode)
-                        node.parentNode.removeChild(node);
-                }, 20);
-            }.bind(this, node), 10 * i);
-
-        }
+        var startTS;
+        var update;
+        update = function() {
+        	 var step = 1;
+        	 var iter = 0;
+             while ((step -= system.doStep(step)) > 0)
+                 if (iter++ > 1000)
+                     break;
+             
+             setTimeout(update, 500);
+        };
+        
+        dojo.create('button', {innerHTML: 'Start', onclick: function() { 
+        	var startTS = new Date().getTime();
+        	update();
+        	setInterval(function() {
+              	balls.every(function(ball) {
+                           var position = ball.getPosition(( new Date().getTime() - startTS)/1000);
+                           
+                           if(!ball.node)
+                          	 ball.node = dojo.create('div', {
+                                	style : {
+                                		position : 'absolute',
+                                		width : ball.R*2+'px',
+                                		height : ball.R*2+'px',
+                                		borderRadius : ball.R+'px',
+                                		background : 'red'
+                                	}
+                                }, dojo.body());
+                           
+                          	 dojo.style(ball.node, {
+                                		left : 200 + position[0] - ball.R + 100 + 'px',
+                                		top : 100 - position[1] - ball.R + 100 + 'px'});
+                           return true;
+                       });
+              }, 25)
+        }}, dojo.body())  
     </script>
 </body>
 </html>
