@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+<head>
+<title>Warsztat Game: Demo</title>
+<script type="text/javascript" src="../dojo.js">
+    //
+</script>
+<script type="text/javascript" src="../vmath.js">
+    //
+</script>
+<link rel="stylesheet" href="../main.css" type="text/css" media="all" />
+</head>
+<body>
+    <script>
+    	// line line intersection test
+    	console.log('line line intersection test');
+    	
+    	console.log('console.log(VMath.intersectLineLine([0,0], [10,0], [0,10], [0,-10]))');
+    	var intersection = VMath.intersectLineLine([0,0], [10,0], [0,10], [0,-10]);
+    	console.log(intersection, intersection!=null?'PASSED': 'FAILED');
+    	
+    	console.log('console.log(VMath.intersectLineLine([0,0], [10,0], [-1,10], [-1,-10]))');
+    	var intersection = VMath.intersectLineLine([0,0], [10,0], [-1,10], [-1,-10]);
+    	console.log(intersection, intersection!=null?'FAILED': 'PASSED');
+    	    	
+    	// line sphere intersection test
+    	console.log('VMath.intersectSphereLine([0,0], [1,0], 1, [2,1], [2,-1]);');
+    	var intersection = VMath.intersectSphereLine([0,0], [1,0], 1, [2,1], [2,-1]);
+    	console.log(intersection, intersection!=null?'PASSED': 'FAILED');
+    	
+    	console.log('VMath.intersectSphereLine([0,0], [0,0], 1, [2,1], [2,-1]);');
+    	var intersection = VMath.intersectSphereLine([0,0], [0,0], 1, [2,1], [2,-1]);
+    	console.log(intersection, intersection!=null?'FAILED': 'PASSED');
+
+    	console.log('VMath.intersectSphereLine([0,0], [1,0], 2, [3,1], [3,-1]);');
+    	var intersection = VMath.intersectSphereLine([0,0], [1,0], 2, [3,1], [3,-1]);
+    	console.log(intersection, intersection!=null?'FAILED': 'PASSED');
+    	
+    	console.log('VMath.intersectSphereLine([-45,-24.372857819055085],[-19.64830446871929,-9.546582425246015],3,[-50,50],[-50,-50])');
+    	var intersection = VMath.intersectSphereLine([-45,-24.372857819055085],[-19.64830446871929,-9.546582425246015],3,[-50,50],[-50,-50]);
+    	console.log(VMath.distanceFromLine(VMath.add([-45,-24.372857819055085],VMath.scale([-19.64830446871929,-9.546582425246015], intersection[0])), [-50,50],[-50,-50]));
+    	console.log(intersection, intersection!=null?'PASSED': 'FAILED');
+    	    	
+    	
+    	// sphere sphere intersection
+    	console.log('VMath.intersectSphereSphere([0,0], [2,0], [0,0], [0,0], 1, 1)');
+    	var intersection = VMath.intersectSphereSphere([0,0], [3,0], [0,0], [0,0], 1, 1);;
+    	console.log(intersection, intersection!=null?'FAILED': 'PASSED');
+    	
+    	console.log('VMath.intersectSphereSphere([0,0], [2,0], [1,0], [0,0], 1, 1)');
+    	var intersection = VMath.intersectSphereSphere([0,0], [3,0], [1,0], [0,0], 1, 1);;
+    	console.log(intersection, intersection!=null?'PASSED': 'FAILED');
+
+    	console.log('VMath.intersectSphereSphere([0,0], [2,0], [1,0], [1,0], 1, 1)');
+    	var intersection = VMath.intersectSphereSphere([0,0], [3,0], [1,0], [1,0], 1, 1);;
+    	console.log(intersection, intersection!=null?'FAILED': 'PASSED');
+
+    	console.log('VMath.intersectSphereSphere([0,0], [2,1], [0,0], [0,-1], 1, 1)');
+    	var intersection = VMath.intersectSphereSphere([0,0], [2,1], [0,0], [0,-1], 1, 1);
+    	console.log(intersection, intersection!=null?'PASSED': 'FAILED');
+    	
+    	
+    </script>
+</body>
+</html>
