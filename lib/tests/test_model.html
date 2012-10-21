@@ -28,13 +28,13 @@
         	
         balls.push(new model.Ball(system, {
         		P : [30, -30 ],
-            	V : [ (Math.random() - Math.random())*500, (Math.random() - Math.random()) *500],
+            	V : [ (Math.random() - Math.random())*100, (Math.random() - Math.random()) *100],
             	R : 10
         	}))
         	
         balls.push(new model.Ball(system, {
         		P : [-30, -30 ],
-            	V : [ (Math.random() - Math.random())*800, (Math.random() - Math.random()) *800],
+            	V : [ (Math.random() - Math.random())*200, (Math.random() - Math.random()) *200],
             	R : 5
         	}))
 
@@ -56,10 +56,11 @@
         });
         
         new model.Edge(system, {
-            A : [ 0, 50 ],
-            B : [ 50, 0 ]
+            A : [ 10, 40 ],
+            B : [ 10, 10 ]
         });
 
+        
         var canvas = dojo.create('canvas', {
         	width: 100,
         	height: 100,
