@@ -3,7 +3,183 @@
     <head>
         <title>Warsztat Game: Demo</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" href="https://raw.github.com/gamedevpl/warsztat-game-demo/master/lib/main.css" type="text/css" media="all" />
+        <style>body {
+    background: black;
+	color: white;
+	overflow: hidden;
+}
+
+.plane {
+	width: 800px;
+	top: 50%;
+	left: 50%;
+	margin-left: -400px;
+	position: absolute;
+}
+
+.plane .ball {
+	position: absolute;
+}
+
+.plane .ball>span {
+	display: block;
+	width: 16px;
+	height: 16px;
+	border-radius: 8px;
+	background: white;
+	margin-top: -8px;
+	margin-left: -8px;
+}
+
+.plane .edge {
+	background: white;
+	height: 3px;
+	position: absolute;
+	transition: width 1s linear, background 0.5s linear, transform 1s linear;
+	-o-transition: width 1s linear, background 0.5s linear, -o-transform 1s
+		linear;
+	-webkit-transition: width 1s linear, background 0.5s linear,
+		-webkit-transform 1s linear;
+	-moz-transition: width 1s linear, background 0.5s linear, -moz-transform
+		1s linear;
+	cursor: pointer;
+}
+
+.plane .edge.hit {
+	background: red;
+}
+
+.plane .edge .status {
+	position: absolute;
+	top: 30px;
+	text-align: center;
+	font-weight: bold;
+	font-size: large;
+	font-family: Tahoma;
+	pointer-events: none;
+	display: none;
+	visibility: hidden;
+}
+
+.plane .edge .status>b {
+	display: block;
+	transition: color 0.5s linear;
+	-o-transition: color 0.5s linear;
+	-webkit-transition: color 0.5s linear;
+	-moz-transition: color 0.5s linear;
+}
+
+.plane .edge .status>input {
+	color: white;
+	background: none;
+	border: none;
+	pointer-events: none;
+	text-align: center;
+}
+
+.plane .edge .box+.status {
+	display: block;
+	visibility: visible;
+}
+
+.plane .edge.hit>.status>b {
+	color: gold;
+}
+
+.edge .box {
+	background: red;
+	width: 25px;
+	height: 10px;
+	position: absolute;
+	margin-top: -5px;
+	transition: margin-left 0.1s linear, background 0.5s linear;;
+	-o-transition: margin-left 0.1s linear, background 0.5s linear;;
+	-webkit-transition: margin-left 0.1s linear, background 0.5s linear;;
+	-moz-transition: margin-left 0.1s linear, background 0.5s linear;
+	border-radius: 10px;
+}
+
+.plane .box.hit {
+	background: white;
+}
+
+/* controls */
+.controls {
+	position: absolute;
+	width: 400px;
+	left: 50%;
+	margin-left: -200px;
+	background: rgba(0,0,0,0.5);
+	padding: 20px 40px;
+	box-sizing: border-box;
+	box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+}
+
+.controls.ingame {
+	bottom: 0;
+	height: 128px;
+}
+
+.controls button,.controls input {
+	font-size: large;
+	color: white;
+	font-weight: bold;
+	font-family: Tahoma;
+	background: none;
+	border: none;
+	padding: 5px 10px;
+}
+
+.controls input {
+	border: 1px solid white;
+}
+
+.controls input[disabled] {
+	border: none;
+	pointer-events: none;
+}
+
+.controls button {
+	cursor: pointer;
+}
+
+.controls button:hover {
+	text-decoration: underline;
+}
+
+/* controls slider */
+.controls .slider {
+	width: 100%;
+	height: 1px;
+	margin-left: -64px;
+}
+
+.controls .slider>div {
+	width: 100%;
+	background: rgba(100, 100, 100, 0.5);
+	height: 64px;
+	position: absolute;
+	pointer-events: none;
+	padding-right: 64px;
+	border-radius: 4px;
+}
+
+.controls .slider>span {
+	display: block;
+	width: 64px;
+	background: red;
+	border-radius: 4px;
+	height: 64px;
+	position: absolute;
+	cursor: pointer;
+}
+
+/* fork */
+
+@media screen and (max-width: 500px) {
+.fork-me {
+	display: none;
+}</style>
         <script type="text/javascript">window.socketOffline=true;</script>
         <script type="text/javascript" src="https://raw.github.com/gamedevpl/warsztat-game-demo/master/lib/dojo.js">//</script>
         <script type="text/javascript" src="https://raw.github.com/gamedevpl/warsztat-game-demo/master/lib/connection.js">//</script>
