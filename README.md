@@ -1,5 +1,7 @@
-warsztat-game-demo
+Warsztat Game: Demo
 ==================
+
+**Demo: http://gamedevpl.github.com/warsztat-game-demo/libs/test_main.html**
 
 Próbna implementacja pomysłu na Warsztat game z użyciem następujących technologii:
 - JavaScript
