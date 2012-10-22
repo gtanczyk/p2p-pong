@@ -15,9 +15,12 @@ import org.java_websocket.server.WebSocketServer;
 public class ProxyServer {
 
 	public static void main(String[] args) throws Exception {
-		String serverHost = args != null && args.length > 0 && args[0] != null ? args[0] : "localhost";
-		int serverSocketPort = args != null && args.length > 1 && args[1] != null ? Integer.parseInt(args[1]) : 10123;
-		int serverHttpPort = args != null && args.length > 2 && args[2] != null ? Integer.parseInt(args[2]) : 1750;
+		String serverHost = args != null && args.length > 0 && args[0] != null ? args[0]
+				: "localhost";
+		int serverSocketPort = args != null && args.length > 1
+				&& args[1] != null ? Integer.parseInt(args[1]) : 10123;
+		int serverHttpPort = args != null && args.length > 2 && args[2] != null ? Integer
+				.parseInt(args[2]) : 1750;
 
 		final ConcurrentLinkedQueue<WebSocket> clients = new ConcurrentLinkedQueue<WebSocket>();
 		final ConcurrentHashMap<Long, WebSocket> clientIDRev = new ConcurrentHashMap<Long, WebSocket>();
@@ -30,11 +33,13 @@ public class ProxyServer {
 		};
 		final AtomicLong hostID = new AtomicLong(0);
 
-		WebSocketServer socketServer = new WebSocketServer(new InetSocketAddress(serverHost, serverSocketPort)) {
+		WebSocketServer socketServer = new WebSocketServer(
+				new InetSocketAddress(serverHost, serverSocketPort)) {
 
 			@Override
 			public void onOpen(WebSocket conn, ClientHandshake handshake) {
-				System.out.println(conn.getRemoteSocketAddress() + " connected");
+				System.out
+						.println(conn.getRemoteSocketAddress() + " connected");
 				long id = System.currentTimeMillis();
 				clients.add(conn);
 				clientID.put(conn, id);
@@ -50,6 +55,7 @@ public class ProxyServer {
 				// java.lang.System.out.println(message);
 				long id = clientID.get(conn);
 				boolean isHost = hostID.get() == id;
+				WebSocket host = clientIDRev.get(hostID.get());
 				String header = message.substring(0, message.indexOf(':'));
 				String body = message.substring(message.indexOf(':') + 1);
 				if (header.equals("host"))
@@ -59,7 +65,8 @@ public class ProxyServer {
 					clientIDRev.get(targetID).send(body);
 				} else if (isHost && header.equals("*")) {
 					for (WebSocket client : clients) {
-						client.send(body);
+						if (client != host)
+							client.send(body);
 					}
 				}
 			}
@@ -76,8 +83,10 @@ public class ProxyServer {
 			}
 
 			@Override
-			public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-				System.out.println(conn.getRemoteSocketAddress() + " disconnected");
+			public void onClose(WebSocket conn, int code, String reason,
+					boolean remote) {
+				System.out.println(conn.getRemoteSocketAddress()
+						+ " disconnected");
 				long id = clientID.get(conn);
 				clients.remove(conn);
 				if (hostID.get() == id) {
@@ -94,7 +103,8 @@ public class ProxyServer {
 		};
 		socketServer.start();
 
-		Server httpServer = new Server(new InetSocketAddress(serverHost, serverHttpPort));
+		Server httpServer = new Server(new InetSocketAddress(serverHost,
+				serverHttpPort));
 		ResourceHandler resources = new ResourceHandler();
 		resources.setDirectoriesListed(false);
 		resources.setWelcomeFiles(new String[] { "index.html" });
