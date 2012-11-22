@@ -1,9 +1,9 @@
-Warsztat Game: Demo
+Gamedev.pl Game: Demo
 ==================
 
 **Demo: http://gamedevpl.github.com/warsztat-game-demo/libs/test_main.html**
 
-Próbna implementacja pomysłu na Warsztat game z użyciem następujących technologii:
+An attempt of implementing simple game using tools such as:
 - JavaScript
 - Websockets
 - CSS3
@@ -12,41 +12,34 @@ Próbna implementacja pomysłu na Warsztat game z użyciem następujących techn
 * Jetty 7.6.7: http://download.eclipse.org/jetty/
 - Dojo Toolkit 1.7
 
-Celem jest zaprezentowanie możliwości technicznych rozwiązania, które polega na tym, że jeden z graczy będzie pełnił funkcję autorytatywnego serwera dla pozostałych graczy.
+The idea was to show that it is possible to implement pseudo peer to peer communication in a browser based game.
 
 = Architektura =
 
-Prosty programik napisany w Javie serwuje pliki statyczne, a także wymienia informacje pomiędzy klientami.
+Simple program written in Java, it serves static files and exchanges messages between game clients.
 
-Serwer socketów nadaje klientom identyfikatory, a także decyduje o tym, który z klientów jest hostem gry.
+Websockets server assigns unique IDs to clients and also decides whether some client is a game host or not.
 
-Host gry wysyła do klientów snapshot stanu gry, w którym znajdują się informacje o graczach, informacje o obiektach, planszy, punktacja i log z przebiegu rozgrywki.
+Game host broadcast informations to other game clients(including himself). Clients receive full snapshot of game world data and all futher calculations are based on latest snapshot until more recent snapshot arrives.
 
-Klient na bazie ostatniego snapshotu prowadzi włąsną symulację gry, ale po otrzymaniu nowego snapshota w pełni dostosowuje stan gry po stronie klienta do tego po stronie serwera.
-
-Pomysły:
-- sumy kontrolne snapshotów
-- synchronizacja czasu pomiędzy klientami
+TODO:
+- snapshot checksums
+- time sync between clients
 
 = Gameplay =
 
-Gra to najprostszy pong dla wielu graczy. Gra toczy się wewnątrz wielokąta:
-- prostokąt dla dwóch graczy
-- trójkąt dla trzech
-- prostokąt dla czterech
-- pięciokąt dla pięciu
-- sześciokąt dla sześci itd.
+The game is based on classic Pong game, however it allows more than two players, each taking one spot in some convex polygon, where number of edges equals to number of players.
 
-Celem gracza jest nieprzepuszczanie piłki przez swój bok.
+Each player must not allow any ball to hit his edge, he should hit the ball with his paddle instead.
 
-= Jak uruchomić w Eclipse =
-1. Pobierz źródła
-2. Dodaj do User Libraries Jetty 7.6.7
-3. Dodaj bibliotekę Jetty do build path
-4. Uruchom klasę ProxyServer
-5. W przeglądarce otwórz adres: http://localhost:1750
+= Hwo to run in Eclipse =
+1. Download source code and create project
+2. Add Jetty 7.6.7 to User Libraries
+3. Add Jetty to build Path
+4. Run ProxyServer
+5. Type http://localhost:1750 in browser
 
-Opcjonalne parametry ProxyServer to:
+Optional ProxyServer parameters:
 [hostname] [socketport] [httpport]
 
-Domyślne wartości: localhost 10123 1750
+Defaults: localhost 10123 1750
