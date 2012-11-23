@@ -33,11 +33,12 @@ The game is based on classic Pong game, however it allows more than two players,
 Each player must not allow any ball to hit his edge, he should hit the ball with his paddle instead.
 
 = Hwo to run in Eclipse =
-# Download source code and create project
-# Add Jetty 7.6.7 to User Libraries
-# Add Jetty to build Path
-# Run ProxyServer
-# Type http://localhost:1750 in browser
+
+1. Download source code and create project
+2. Add Jetty 7.6.7 to User Libraries
+3. Add Jetty to build Path
+4. Run ProxyServer
+5. Type http://localhost:1750 in browser
 
 Optional ProxyServer parameters:
 [hostname] [socketport] [httpport]
