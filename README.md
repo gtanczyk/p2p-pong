@@ -14,7 +14,7 @@ An attempt of implementing simple game using tools such as:
 
 The idea was to show that it is possible to implement pseudo peer to peer communication in a browser based game.
 
-= Architektura =
+= Architecture =
 
 Simple program written in Java, it serves static files and exchanges messages between game clients.
 
