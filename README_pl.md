@@ -1,4 +1,4 @@
-Warsztat Game: Demo
+Peer to peer pong
 ==================
 
 **Demo: http://gamedevpl.github.com/warsztat-game-demo/libs/test_main.html**
