@@ -32,7 +32,7 @@ The game is based on classic Pong game, however it allows more than two players,
 
 Each player must not allow any ball to hit his edge, he should hit the ball with his paddle instead.
 
-= Hwo to run in Eclipse =
+= How to run in Eclipse =
 
 1. Download source code and create project
 2. Add Jetty 7.6.7 to User Libraries
